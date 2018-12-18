@@ -7,16 +7,22 @@ var mongoose   = require('mongoose'),
 var profile = {
 
   // Basic info
-  name: {
+  fname: {
     type: String,
     min: 1,
     max: 100,
   },
 
-  adult: {
-    type: Boolean,
-    required: true,
-    default: false,
+  lname: {
+    type: String,
+    min: 1,
+    max: 100,
+  },
+
+  email: {
+    type: String,
+    min: 1,
+    max: 100,
   },
 
   school: {
@@ -25,17 +31,42 @@ var profile = {
     max: 150,
   },
 
-  graduationYear: {
+  grade: {
     type: String,
     enum: {
-      values: '2016 2017 2018 2019'.split(' '),
+      values: 'H F S J N'.split(' '),
     }
   },
 
-  description: {
+  major: {
     type: String,
+    min: 1,
+    max: 100,
+  },
+
+  gender: {
+    type: String,
+    enum : {
+      values: 'F T N P'.split(' ')
+    }
+  },
+
+  ethnicity: {
+    type: String,
+    enum : {
+      values: 'A AF C H O'.split(' ')
+    }
+  },
+
+  hacks: {
+    type: Number,
     min: 0,
-    max: 300
+    max: 200
+  },
+
+  attended: {
+    type: Boolean,
+    default: false,
   },
 
   essay: {
@@ -44,12 +75,21 @@ var profile = {
     max: 1500
   },
 
-  // Optional info for demographics
-  gender: {
+  topic: {
     type: String,
-    enum : {
-      values: 'M F O N'.split(' ')
-    }
+    min: 0,
+    max: 1500
+  },
+
+  links: {
+    type: String,
+    min: 0,
+    max: 1000
+  },
+
+  adult: {
+    type: Boolean,
+    default: false,
   },
 
 };
@@ -57,46 +97,22 @@ var profile = {
 // Only after confirmed
 var confirmation = {
   phoneNumber: String,
+
   dietaryRestrictions: [String],
+
   shirtSize: {
     type: String,
     enum: {
-      values: 'XS S M L XL XXL WXS WS WM WL WXL WXXL'.split(' ')
+      values: 'XS S M L XL'.split(' ')
     }
   },
-  wantsHardware: Boolean,
-  hardware: String,
 
-  major: String,
-  github: String,
-  twitter: String,
-  website: String,
   resume: String,
 
-  needsReimbursement: Boolean,
-  address: {
-    name: String,
-    line1: String,
-    line2: String,
-    city: String,
-    state: String,
-    zip: String,
-    country: String
-  },
-  receipt: String,
-
-  hostNeededFri: Boolean,
-  hostNeededSat: Boolean,
-  genderNeutral: Boolean,
-  catFriendly: Boolean,
-  smokingFriendly: Boolean,
-  hostNotes: String,
+  econtact: String,
+  enumber: String,
 
   notes: String,
-
-  signatureLiability: String,
-  signaturePhotoRelease: String,
-  signatureCodeOfConduct: String,
 };
 
 var status = {
@@ -330,11 +346,9 @@ schema.statics.getByToken = function(token, callback){
 
 schema.statics.validateProfile = function(profile, cb){
   return cb(!(
-    profile.name.length > 0 &&
-    profile.adult &&
-    profile.school.length > 0 &&
-    ['2016', '2017', '2018', '2019'].indexOf(profile.graduationYear) > -1 &&
-    ['M', 'F', 'O', 'N'].indexOf(profile.gender) > -1
+    profile.fname.length > 0 &&
+    profile.lname.length > 0 &&
+    profile.school.length > 0 
     ));
 };
 
