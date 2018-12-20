@@ -19,7 +19,7 @@ angular.module('reg')
 
       _setupForm();
 
-      $scope.fileName = user._id + "_" + user.profile.name.split(" ").join("_");
+      $scope.fileName = user._id + "_" + user.profile.fname + "_" + user.profile.lname;
 
       // -------------------------------
 

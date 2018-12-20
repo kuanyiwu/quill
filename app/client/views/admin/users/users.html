@@ -81,7 +81,7 @@
 
         <div class="actions">
           <div class="ui positive right labeled icon button">
-            Nothing
+            Okay
             <i class="checkmark icon"></i>
           </div>
         </div>
@@ -94,10 +94,8 @@
             <th>Name</th>
             <th>E-mail address</th>
             <th>School</th>
-            <th>Grad</th>
+            <th>Adult</th>
             <th>V/S/A/C</th>
-            <th>Host</th>
-            <th>$</th>
             <th></th>
             <th></th>
           </tr>
@@ -109,16 +107,22 @@
             ng-class="rowClass(user)">
             <td>
               <strong>
-                {{user.profile.name}}
+                {{user.profile.fname}} {{user.profile.lname}}
                 &nbsp;
 
               </strong>
             </td>
             <td>{{user.email}}</td>
             <td>{{user.profile.school}}</td>
-            <td
-              class="collapsing">
-              {{user.profile.graduationYear}}
+            <td>
+              <i
+                ng-if="user.profile.adult"
+                class="green check circle icon">
+              </i>
+              <i
+                ng-if="!user.profile.adult"
+                class="red remove circle icon">
+              </i>
             </td>
             <td
               class="collapsing">
@@ -172,42 +176,7 @@
               </i>
 
             </td>
-
-            <!-- Host -->
-            <td
-              class="collapsing">
-
-              <span ng-if="user.status.confirmed">
-                <i
-                  ng-if="user.confirmation.hostNeededFri"
-                  class="home icon">
-                </i>
-                <i
-                  ng-if="!user.confirmation.hostNeededFri && user.confirmation.hostNeededSat"
-                  class="no icon">
-                </i>
-                <i
-                  ng-if="user.confirmation.hostNeededSat"
-                  class="home icon">
-                </i>
-              </span>
-
-            </td>
-
-            <td
-              class="collapsing">
-              <span ng-if="user.status.confirmed">
-                <i
-                  ng-if="user.confirmation.needsReimbursement && !user.status.reimbursementGiven"
-                  class="red money icon">
-                </i>
-                <i
-                  ng-if="user.confirmation.needsReimbursement && user.status.reimbursementGiven"
-                  class="green money icon">
-                </i>
-              </span>
-            </td>
-
+        
             <td
               class="collapsing">
               <button

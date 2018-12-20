@@ -70,7 +70,7 @@ angular.module('reg')
         if (!user.status.checkedIn){
           swal({
             title: "Whoa, wait a minute!",
-            text: "You are about to check in " + user.profile.name + "!",
+            text: "You are about to check in " + user.profile.fname + " " + user.profile.lname + "!",
             icon: "warning",
             buttons: {
               cancel: {
@@ -96,7 +96,7 @@ angular.module('reg')
               .checkIn(user._id)
               .then(response => {
                 $scope.users[index] = response.data;
-                swal("Accepted", response.data.profile.name + " has been checked in.", "success");
+                swal("Accepted", response.data.profile.fname + " " + response.data.profile.lname + " has been checked in.", "success");
               });
           });
         } else {
@@ -104,7 +104,7 @@ angular.module('reg')
             .checkOut(user._id)
             .then(response => {
               $scope.users[index] = response.data;
-              swal("Accepted", response.data.profile.name + ' has been checked out.', "success");
+              swal("Accepted", response.data.profile.fname + " " + response.data.profile.lname + ' has been checked out.', "success");
             });
         }
       };
@@ -131,7 +131,7 @@ angular.module('reg')
           },
           dangerMode: true,
           icon: "warning",
-          text: "You are about to accept " + user.profile.name + "!",
+          text: "You are about to accept " + user.profile.fname + " " + user.profile.lname + "!",
           title: "Whoa, wait a minute!"
         }).then(value => {
           if (!value) {
@@ -167,7 +167,7 @@ angular.module('reg')
               .admitUser(user._id)
               .then(response => {
                 $scope.users[index] = response.data;
-                swal("Accepted", response.data.profile.name + ' has been admitted.', "success");
+                swal("Accepted", response.data.profile.fname + " " + response.data.profile.lname + ' has been admitted.', "success");
               });
           });
         });
@@ -179,7 +179,7 @@ angular.module('reg')
         if (!user.admin){
           swal({
             title: "Whoa, wait a minute!",
-            text: "You are about make " + user.profile.name + " an admin!",
+            text: "You are about make " + user.profile.fname + " " + user.profile.lname + " an admin!",
             icon: "warning",
             buttons: {
               cancel: {
@@ -204,17 +204,44 @@ angular.module('reg')
               .makeAdmin(user._id)
               .then(response => {
                 $scope.users[index] = response.data;
-                swal("Made", response.data.profile.name + ' an admin.', "success");
+                swal("Made", response.data.profile.fname + " " + response.data.profile.lname + ' an admin.', "success");
               });
             }
           );
         } else {
-          UserService
+          swal({
+            title: "Whoa, wait a minute!",
+            text: "You are about remove " + user.profile.fname + " " + user.profile.lname + " as an admin!",
+            icon: "warning",
+            buttons: {
+              cancel: {
+                text: "Cancel",
+                value: null,
+                visible: true
+              },
+              confirm: {
+                text: "Yes, remove them as admin",
+                className: "danger-button",
+                closeModal: false,
+                value: true,
+                visible: true
+              }
+            }
+          }).then(value => {
+            if (!value) {
+              return;
+            }
+
+            UserService
             .removeAdmin(user._id)
             .then(response => {
               $scope.users[index] = response.data;
-              swal("Removed", response.data.profile.name + ' as admin', "success");
+              swal("Removed", response.data.profile.fname + " " + response.data.profile.lname + ' as admin', "success");
             });
+            }
+          );
+
+          
         }
       };
 
@@ -272,8 +299,11 @@ angular.module('reg')
             name: 'Profile',
             fields: [
               {
-                name: 'Name',
-                value: user.profile.name
+                name: 'First Name',
+                value: user.profile.fname
+              },{
+                name: 'Last Name',
+                value: user.profile.lname
               },{
                 name: 'Gender',
                 value: user.profile.gender
@@ -281,11 +311,11 @@ angular.module('reg')
                 name: 'School',
                 value: user.profile.school
               },{
-                name: 'Graduation Year',
-                value: user.profile.graduationYear
+                name: 'Grade',
+                value: user.profile.grade
               },{
-                name: 'Description',
-                value: user.profile.description
+                name: 'Topic',
+                value: user.profile.topic
               },{
                 name: 'Essay',
                 value: user.profile.essay
@@ -298,81 +328,32 @@ angular.module('reg')
                 name: 'Phone Number',
                 value: user.confirmation.phoneNumber
               },{
-                name: 'Dietary Restrictions',
-                value: user.confirmation.dietaryRestrictions.join(', ')
+                name: 'Vegetarian',
+                value: user.confirmation.vegetarian
+              },{
+                name: 'Vegan',
+                value: user.confirmation.vegan
+              },{
+                name: 'GlutenFree',
+                value: user.confirmation.glutenfree
               },{
                 name: 'Shirt Size',
                 value: user.confirmation.shirtSize
               },{
-                name: 'Major',
-                value: user.confirmation.major
+                name: 'Resume',
+                value: user.confirmation.resume
               },{
-                name: 'Github',
-                value: user.confirmation.github
+                name: 'Travel',
+                value: user.confirmation.bus
               },{
-                name: 'Website',
-                value: user.confirmation.website
+                name: 'Emergency Contact',
+                value: user.confirmation.econtact
               },{
-                name: 'Needs Hardware',
-                value: user.confirmation.wantsHardware,
+                name: 'Emergency Number',
+                value: user.confirmation.enumber,
                 type: 'boolean'
               },{
-                name: 'Hardware Requested',
-                value: user.confirmation.hardware
-              }
-            ]
-          },{
-            name: 'Hosting',
-            fields: [
-              {
-                name: 'Needs Hosting Friday',
-                value: user.confirmation.hostNeededFri,
-                type: 'boolean'
-              },{
-                name: 'Needs Hosting Saturday',
-                value: user.confirmation.hostNeededSat,
-                type: 'boolean'
-              },{
-                name: 'Gender Neutral',
-                value: user.confirmation.genderNeutral,
-                type: 'boolean'
-              },{
-                name: 'Cat Friendly',
-                value: user.confirmation.catFriendly,
-                type: 'boolean'
-              },{
-                name: 'Smoking Friendly',
-                value: user.confirmation.smokingFriendly,
-                type: 'boolean'
-              },{
-                name: 'Hosting Notes',
-                value: user.confirmation.hostNotes
-              }
-            ]
-          },{
-            name: 'Travel',
-            fields: [
-              {
-                name: 'Needs Reimbursement',
-                value: user.confirmation.needsReimbursement,
-                type: 'boolean'
-              },{
-                name: 'Received Reimbursement',
-                value: user.confirmation.needsReimbursement && user.status.reimbursementGiven
-              },{
-                name: 'Address',
-                value: user.confirmation.address ? [
-                  user.confirmation.address.line1,
-                  user.confirmation.address.line2,
-                  user.confirmation.address.city,
-                  ',',
-                  user.confirmation.address.state,
-                  user.confirmation.address.zip,
-                  ',',
-                  user.confirmation.address.country,
-                ].join(' ') : ''
-              },{
-                name: 'Additional Notes',
+                name: 'Notes',
                 value: user.confirmation.notes
               }
             ]
