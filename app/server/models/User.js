@@ -34,7 +34,7 @@ var profile = {
   grade: {
     type: String,
     enum: {
-      values: 'H F S J N'.split(' '),
+      values: 'HighSchool Freshman Sophomore Junior Senior'.split(' '),
     }
   },
 
@@ -47,14 +47,14 @@ var profile = {
   gender: {
     type: String,
     enum : {
-      values: 'F T N P'.split(' ')
+      values: 'Female Trans NonBinary PreferNotToAnswer'.split(' ')
     }
   },
 
   ethnicity: {
     type: String,
     enum : {
-      values: 'A AF C H O'.split(' ')
+      values: 'Asian African Caucasian Hispanic Other PreferNotToAnswer'.split(' ')
     }
   },
 
@@ -98,12 +98,21 @@ var profile = {
 var confirmation = {
   phoneNumber: String,
 
-  dietaryRestrictions: [String],
+  vegetarian: Boolean,
+  vegan: Boolean,
+  glutenfree: Boolean,
 
   shirtSize: {
     type: String,
     enum: {
       values: 'XS S M L XL'.split(' ')
+    }
+  },
+
+  bus: {
+    type: String,
+    enum: {
+      values: 'No UCSD UCI CalPolySLO CalPolyPomona CalTech'.split(' ')
     }
   },
 
@@ -159,10 +168,6 @@ var status = {
   confirmBy: {
     type: Number
   },
-  reimbursementGiven: {
-    type: Boolean,
-    default: false
-  }
 };
 
 // define the schema for our admin model

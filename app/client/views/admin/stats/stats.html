@@ -60,16 +60,7 @@
             {{stats.confirmed}}
           </div>
         </div>
-        <div
-          class="item">
-          <i class="green circle check icon"></i>
-          <div class="content">
-            <strong>
-              Confirmed (MIT)
-            </strong> :
-            {{stats.confirmedMit}}
-          </div>
-        </div>
+        
         <div class="item">
           <i class="circle red icon"></i>
           <div class="content">
@@ -96,29 +87,15 @@
           <i class="child icon"></i>
           <div class="content">
             <strong>
-              Unisex shirt sizes:
-            </strong> :
-              XS ({{stats.shirtSizes['XS']}})
-              S ({{stats.shirtSizes['S']}})
-              M ({{stats.shirtSizes['M']}})
-              L ({{stats.shirtSizes['L']}})
-              XL ({{stats.shirtSizes['XL']}})
-              XXL ({{stats.shirtSizes['XXL']}})
-          </div>
-        </div>
-
-        <div class="item">
-          <i class="child icon"></i>
-          <div class="content">
-            <strong>
-              Women's shirt sizes:
-            </strong> :
-              XS ({{stats.shirtSizes['WXS']}})
-              S ({{stats.shirtSizes['WS']}})
-              M ({{stats.shirtSizes['WM']}})
-              L ({{stats.shirtSizes['WL']}})
-              XL ({{stats.shirtSizes['WXL']}})
-              XXL ({{stats.shirtSizes['WXXL']}})
+              Shirt sizes: 
+            </strong> 
+            <br>
+              XS: &nbsp; {{stats.shirtSizes['XS']}} <br>
+              S: &nbsp; {{stats.shirtSizes['S']}} <br>
+              M: &nbsp; {{stats.shirtSizes['M']}} <br>
+              L: &nbsp; {{stats.shirtSizes['L']}} <br>
+              XL: &nbsp; {{stats.shirtSizes['XL']}} <br>
+              XXL: &nbsp; {{stats.shirtSizes['XXL']}} <br>
           </div>
         </div>
 
@@ -128,28 +105,12 @@
           <i class="green money icon"></i>
           <div class="content">
             <strong>
-              Total Reimbursements:
-            </strong>{{stats.reimbursementTotal}}
-          </div>
-        </div>
+              Travel
+            </strong>
+            <br>
+            No: {{stats.bus['No']}} <br>
+            UCSD: {{stats.bus['UCSD']}} <br>
 
-        <div class="item">
-          <i class="frown icon"></i>
-          <div class="content">
-            <strong>
-              Still Need Reimbursement:
-            </strong>{{stats.reimbursementMissing}}
-          </div>
-        </div>
-
-        <div class="ui divider"></div>
-
-        <div class="item">
-          <i class="plug icon"></i>
-          <div class="content">
-            <strong>
-              Need/Want Hardware:
-            </strong>{{stats.wantsHardware}}
           </div>
         </div>
 

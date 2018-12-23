@@ -59,6 +59,18 @@ angular.module('reg')
                 }
               ]
             },
+            econtact: {
+              identifier: 'econtact',
+            },
+            enumber: {
+              identifier: 'enumber',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter a phone number.'
+                }
+              ]
+            },
           }
         });
       }

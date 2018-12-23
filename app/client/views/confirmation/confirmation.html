@@ -13,14 +13,15 @@
         <fieldset ng-disabled="pastConfirmation">
 
           <div class="field">
-            <label> What is your phone number? </label>
+            <label> What is your phone number? (format: xxx-xxx-xxxx) </label>
             <p>
               Don’t worry, we’ll only use it for emergency contacts/updates.
             </p>
             <input type="tel"
                    name="phone"
                    ng-model="user.confirmation.phoneNumber"
-                   placeholder="(123)-456-7890"
+                   ng-pattern="/?\d{3}[- ]?\d{3}[- ]?\d{4}$/"
+                   placeholder="xxx-xxx-xxxx"              
                    required>
           </div>
 
@@ -35,21 +36,21 @@
             </p>
 
             <div class="ui checkbox">
-              <input type="checkbox" id="vegetarian" ng-model="user.profile.vegetarian">
+              <input name="vegetarian" type="checkbox" id="vegetarian" ng-model="user.confirmation.vegetarian">
               <label for="vegetarian">Vegetarian</label>
             </div>
 
             <br>
 
             <div class="ui checkbox">
-              <input type="checkbox" id="vegan" ng-model="user.profile.vegan">
+              <input name="vegan" type="checkbox" id="vegan" ng-model="user.confirmation.vegan">
               <label for="vegan">Vegan</label>
             </div>
             
             <br>
 
             <div class="ui checkbox">
-              <input type="checkbox" id="glutenfree" ng-model="user.profile.glutenfree">
+              <input name="glutenfree" type="checkbox" id="glutenfree" ng-model="user.confirmation.glutenfree">
               <label for="glutenfree">Gluten Free</label>
             </div>
 
@@ -99,13 +100,14 @@
             <label> Will you need a bus spot from any of these locations? </label>
             <select
               name="bus"
-              ng-model="user.confirmation.bus">
-              <option value="N">No</option>
-              <option value="SD">UCSD </option>
-              <option value="I">UCI</option>
-              <option value="SLO">Cal Poly SLO</option>
-              <option value="CPP">Cal Poly Pomona</option>
-              <option value="CT">Cal Tech</option>
+              ng-model="user.confirmation.bus"
+              required>
+              <option value="No">No</option>
+              <option value="UCSD">UCSD </option>
+              <option value="UCI">UCI</option>
+              <option value="CalPolySLO">Cal Poly SLO</option>
+              <option value="CalPolyPomona">Cal Poly Pomona</option>
+              <option value="CalTech">Cal Tech</option>
             </select>
           </div>
 
@@ -128,13 +130,13 @@
             <input type="tel"
                    name="enumber"
                    ng-model="user.confirmation.enumber"
-                   placeholder="(123)-456-7890"
+                   placeholder="xxx-xxx-xxxx"
                    required>
           </div>
 
           <br>
           <br>
-          
+
           <div class="divided title">Additional Notes</div>
 
           <div class="field">

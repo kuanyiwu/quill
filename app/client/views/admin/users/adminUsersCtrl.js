@@ -305,21 +305,40 @@ angular.module('reg')
                 name: 'Last Name',
                 value: user.profile.lname
               },{
-                name: 'Gender',
-                value: user.profile.gender
-              },{
                 name: 'School',
                 value: user.profile.school
               },{
                 name: 'Grade',
                 value: user.profile.grade
               },{
+                name: 'Major',
+                value: user.profile.major
+              },{
+                name: 'Gender',
+                value: user.profile.gender
+              },{ 
+                name: 'Ethnicity',
+                value: user.profile.ethnicity
+              },{   
+                name: 'Attended Hackathons',
+                value: user.profile.hacks
+              },{    
+                name: 'Attended AthenaHacks',
+                value: user.profile.attended
+              },{                    
                 name: 'Topic',
                 value: user.profile.topic
               },{
                 name: 'Essay',
                 value: user.profile.essay
+              },{
+                name: 'Links',
+                value: user.profile.links
+              },{
+                name: 'Adult',
+                value: user.profile.adult
               }
+
             ]
           },{
             name: 'Confirmation',
